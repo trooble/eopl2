@@ -25,6 +25,20 @@
     (path-iter n bst '())))
 
 ;;; 2
+;;; <lon> ::= () | (<num> . <lon>)
+
+;; Insert n after the first element in lon (a sorted list of numbers)
+;; less than or equal to n
+(define insert
+  (lambda (n lon)
+    (if (null? lon)
+	(list n)
+	(if (<= n (car lon))
+	    (cons n lon)
+	    (cons (car lon) (insert n (cdr lon)))))))
+
 (define sort
   (lambda (lon)
-    ...))
+    (if (null? lon)
+	'()
+	(insert (car lon) (sort (cdr lon))))))
