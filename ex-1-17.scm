@@ -42,3 +42,26 @@
     (if (null? lon)
 	'()
 	(insert (car lon) (sort (cdr lon))))))
+
+;; (sort2 pred lon)
+;; Can we go to the end of the list and work backwards?
+;; No, that leads back to the problem of trying to insert something
+;; in the right place.
+;; So, do the same thing as for the first sort - recursively sorting
+;; the cdr guarantees that we first sort a list of length 1, then
+;; length 2 and so on, so each successive application works on a sorted
+;; list.
+
+(define insert2
+  (lambda (n pred lon)
+    (if (null? lon)
+	(list n)
+	(if (not (pred n (car lon)))
+	    (cons (car lon) (insert2 n pred (cdr lon)))
+	    (cons n lon)))))
+
+(define sort2
+  (lambda (pred lon)
+    (if (null? lon)
+	'()
+	(insert2 (car lon) pred (sort2 pred (cdr lon))))))
