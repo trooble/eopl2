@@ -1,0 +1,17 @@
+** Merging changes
+* change commited in origin
+* change committed in clone
+
+(In clone)
+git pull
+(Messages from git)
+(Edit conflicted files)
+git add <conflicted files>
+git commit -m <msg>
+git push
+(Messages from git)
+
+(In origin)
+git reset --hard (as per second set of messages above)
+
+- Check if github automatically does the "git reset"
