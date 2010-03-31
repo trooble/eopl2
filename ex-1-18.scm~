@@ -6,25 +6,6 @@
 ;;; 2
 ;; <slist>             ::= '() | (<symbol-expression> . <slist>)
 ;; <symbol-expression> ::= <symbol> | <slist>
-(define car&cdr-h
-  (lambda (s slist errvalue rem ret)
-    (if (null? slist)
-	(if (null? rem)
-	    errvalue
-	    (compose ret cdr))
-;	    (car&cdr-h s rem errvalue rem (compose ret cdr)))
-	(if (symbol? (car slist))
-	    (if (eqv? s (car slist))
-		(if (null? ret)
-		    car
-		    (compose ret car))
-		(car&cdr-h s (car slist) errvalue (cdr slist)
-			   (compose ret (car&cdr s (cdr slist) errvalue))))))))
-
-(define car&cdr
-  (lambda (s slist errvalue)
-    (car&cdr-h s slist errvalue slist '())))
-
 (define car&cdr
   (lambda (s slist errvalue)
     (if (null? slist)
