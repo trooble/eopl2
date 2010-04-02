@@ -6,6 +6,7 @@
 ;;; 2
 ;; <slist>             ::= '() | (<symbol-expression> . <slist>)
 ;; <symbol-expression> ::= <symbol> | <slist>
+<<<<<<< HEAD:ex-1-18.scm
 
 ;; Done!
 ;; What was needed was an iterative function that returned either a
@@ -34,7 +35,6 @@
 		  res
 		  (car&cdr-h s (cdr slist) (symbol-or-compose cdr success-val)
 			     failure-val)))))))
-
 (define car&cdr
   (lambda (s slist errvalue)
     (let ((res (car&cdr-h s slist '() errvalue)))
