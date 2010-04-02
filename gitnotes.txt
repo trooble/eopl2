@@ -15,3 +15,16 @@ git push
 git reset --hard (as per second set of messages above)
 
 - Check if github automatically does the "git reset"
+
+======================================================================
+
+Error:
+ ! [rejected]        master -> master (non-fast forward)
+error: failed to push some refs to <remote>
+
+Do a merge:
+git pull
+(fix)
+git add
+git commit
+git push origin master
