@@ -29,3 +29,20 @@
 (define free-vars
   (lambda (expr)
     (free-vars-h expr '() '())))
+
+(define bound-vars-h
+  (lambda (expr lvars bvars)
+    (let ((bound? (lambda (x) (member x lvars))))
+      (if (null? expr)
+	  bvars
+	  (if (symbol? expr)
+	      (if (bound? expr)
+		  (set-intersect (list expr) bvars)
+		  bvars)
+	      (if (eqv? 'lambda (car expr))
+		  (bound-vars-h (caddr expr) (cons (caadr expr) lvars) bvars)
+		(set-intersect (bound-vars-h (car expr) lvars bvars)
+				  (bound-vars-h (cadr expr) lvars bvars))))))))
+(define bound-vars
+  (lambda (expr)
+    (bound-vars-h expr '() '())))
