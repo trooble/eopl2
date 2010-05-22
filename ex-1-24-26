@@ -1,0 +1,48 @@
+Ex. 1.24
+========
+
+Formal definition of occurs free, occurs bound
+----------------------------------------------
+
+A variable x occurs free in a lambda calculus expression E if and only if
+
+1. E is a variable reference and E is the same as x; or
+
+2. E is of the form (lambda (y) E'), where y is different from x and x
+   occurs free in E'; or
+
+3. E is of the form (E1 E2) and x occurs free in E1 or E2.
+
+A variable x occurs bound in a lambda calculus expression E if and only if
+
+1. E is of the form (lambda (y) E'), where x occurs bound in E' or x
+   and y are the same variable and y occurs free in E'; or
+
+2. E is of the form (E1 E2) and x occurs bound in E1 or E2.
+
+Extend to include Scheme let and let* expressions
+-------------------------------------------------
+
+A variable occurs free in a lambda expression E if and only if 1, 2
+and 3 above hold and
+
+4. E is of the form (let ((y1 E1) (y2 E2) ..(yn En)) E') or E is of the
+   form (let*((y1 E1) (y2 E2) ..(yn En) E'), where x is different from
+   all of y1, y2 .. yn and x occurs free in E'.
+
+A variable occurs bound in a lambda expression E if and only if 1 and
+2 above hold and
+
+3. E is of the form (let ((y1 E1) (y2 E2) ..(yn En)) E'), where x
+   occurs bound in E' or x is the same variable as any of y1, y2,
+   .. yn and y1, y2 .. yn occur free in E'.
+
+
+Ex 1.25
+=======
+
+x occurs free in E iff
+
+E === (quote E') and ???????????????????????
+
+TODO: Ex 1.26
