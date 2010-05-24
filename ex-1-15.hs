@@ -19,3 +19,11 @@ exists _ [] = False
 exists pred (x:xs)
   | pred x = True
   | otherwise = exists pred xs
+
+lset lst n e =
+    let lsp [] _ = []
+        lsp (y:ys) p
+             | p == n = e : ys
+             | otherwise = y : lsp ys (p + 1)
+    in
+        lsp lst 0
