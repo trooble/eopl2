@@ -4,20 +4,20 @@
 
 (define base 16)
 
-(define zero '())
+(define b-zero '())
 
 (define b-zero? null?)
 
-(define succ
+(define b-succ
   (lambda (n)
     (if (b-zero? n)
 	'(1)
-	(let ((succ-lsd (+ (car n) 1)))
-	  (if (= succ-lsd base)
-	      (cons 0 (succ (cdr n)))
-	      (cons succ-lsd (cdr n)))))))
+	(let ((b-succ-lsd (+ (car n) 1)))
+	  (if (= b-succ-lsd base)
+	      (cons 0 (b-succ (cdr n)))
+	      (cons b-succ-lsd (cdr n)))))))
 
-(define pred
+(define b-pred
   (lambda (n)
     (cond
      ((null? n) #f)
@@ -25,8 +25,8 @@
       (if (null? (cdr n))
 	  #f
 	  (if (zero? (cadr n))
-	      (pred (cdr n))
-	      (cons (- base 1) (pred (cdr n))))))
+	      (b-pred (cdr n))
+	      (cons (- base 1) (b-pred (cdr n))))))
      (else (cons (- (car n) 1) (cdr n))))))
 
 ; some numbers
@@ -34,7 +34,7 @@
   (lambda (n)
     (if (zero? n)
 	zero
-	(succ (make-number (- n 1))))))
+	(b-succ (make-number (- n 1))))))
 
 ; factorial 0 = 1
 ;         | n = n * factorial (n - 1)
@@ -42,16 +42,23 @@
   (lambda (x y)
     (if (b-zero? x)
 	y
-	(succ (plus (pred x) y)))))
+	(b-succ (plus (b-pred x) y)))))
 
 (define mult-h
   (lambda (x y)
-    (if (b-zero? (pred x))
+    (if (b-zero? (b-pred x))
 	y
-	(plus y (mult-h (pred x) y)))))
+	(plus y (mult-h (b-pred x) y)))))
 
 ;; (define mult
 ;;   (lambda (x y)
 ;;     (if (or (zero? x) (zero? y))
 ;; 	zero
 ;; 	(
+
+(define (do-succ start n)
+  (let ((x (b-succ start)))
+    (display x)
+    (newline)
+    (if (> n 0)
+	(do-succ x (- n 1)))))
