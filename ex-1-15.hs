@@ -27,3 +27,12 @@ lset lst n e =
              | otherwise = y : lsp ys (p + 1)
     in
         lsp lst 0
+
+e_product :: [a] -> [a] -> [[a]]
+e_product [] _ = []
+e_product (x:xs) y =
+    (scalar_product x y) ++ (e_product xs y)
+
+scalar_product s [] = []
+scalar_product s (x:xs) =
+    [s,x] : scalar_product s xs
