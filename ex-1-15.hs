@@ -36,3 +36,18 @@ e_product (x:xs) y =
 scalar_product s [] = []
 scalar_product s (x:xs) =
     [s,x] : scalar_product s xs
+
+my_reverse lst =
+    let putpair [] outl = outl
+        putpair (x:xs) outl =
+            putpair xs (x:outl)
+    in
+        putpair lst []
+
+my_append l1 l2 =
+    let mya [] l2 = l2
+        mya l1 [] = l1
+        mya (x:xs) l2 =
+            x : mya xs l2
+    in
+        mya l1 l2
